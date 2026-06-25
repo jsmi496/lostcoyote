@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-script: "Sacramento", cursive;
+  --font-sans: "Familjen Grotesk", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bone text-night font-sans antialiased;
+}
+
+/* Thin grain/texture overlay for warmth */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3 text-sm font-semibold uppercase tracking-widest transition-all duration-300;
+  }
+  .btn-primary {
+    @apply btn bg-clay text-bone hover:bg-ember hover:-translate-y-0.5 hover:shadow-xl hover:shadow-clay/20;
+  }
+  .btn-ghost {
+    @apply btn border border-bone/40 text-bone hover:border-bone hover:bg-bone/10;
+  }
+  .btn-dark {
+    @apply btn bg-night text-bone hover:bg-moss hover:-translate-y-0.5;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-widest text-clay;
+  }
+  .section {
+    @apply relative z-10 px-6 py-24 md:px-12 lg:py-32;
+  }
+}
